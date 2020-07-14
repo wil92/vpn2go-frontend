@@ -6,7 +6,9 @@ describe('VpnService', () => {
   let service: VpnService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [VpnService]
+    });
     service = TestBed.inject(VpnService);
   });
 
