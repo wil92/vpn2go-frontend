@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { CoreModule } from '../../core/core.module';
 import { DashboardComponent } from './dashboard.component';
+import { AuthGuard } from '../../core/guards';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -13,6 +14,7 @@ import { DashboardComponent } from './dashboard.component';
     RouterModule.forChild([
       {
         path: '',
+        canActivate: [AuthGuard],
         component: DashboardComponent
       }
     ])
