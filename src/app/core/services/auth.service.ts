@@ -14,4 +14,10 @@ export class AuthService {
     const password = localStorage.getItem(AuthService.PASSWORD_LS);
     return !!username && !!password;
   }
+
+  getCredentials(): {username: string, password: string} {
+    const username = localStorage.getItem(AuthService.USERNAME_LS);
+    const password = localStorage.getItem(AuthService.PASSWORD_LS);
+    return {username, password};
+  }
 }
