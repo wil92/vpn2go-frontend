@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { VpnService } from './services';
+import { AuthService, VpnService } from './services';
 
 @NgModule({
-  providers: [VpnService],
+  providers: [VpnService, AuthService],
   imports: [CommonModule]
 })
 export class CoreModule {
