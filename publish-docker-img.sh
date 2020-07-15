@@ -7,7 +7,7 @@ IFS=$'\n'      # Change IFS to new line
 tags=($tags) # split to array $names
 IFS=$SAVEIFS   # Restore IFS
 
-docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
 
 echo $(git status)
 echo $tags
