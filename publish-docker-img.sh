@@ -7,7 +7,7 @@ IFS=$'\n'      # Change IFS to new line
 tags=($tags) # split to array $names
 IFS=$SAVEIFS   # Restore IFS
 
-echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
+echo "$DOCKER_PASSWORD" | docker login -u ${DOCKER_USER} --password-stdin
 
 echo $(git status)
 echo $tags
@@ -20,8 +20,8 @@ do
   echo "Tag name: ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}"
 
   # tag current image
-  docker tag img $DOCKER_USER/vpn2go-frontend:${tags[$i]}
+  docker tag img ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}
 
   # push docker image to DockerHub
-  docker push $DOCKER_USER/vpn2go-frontend:${tags[$i]}
+  docker push ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}
 done
