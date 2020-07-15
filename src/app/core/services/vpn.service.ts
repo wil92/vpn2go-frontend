@@ -17,12 +17,19 @@ export class VpnService {
   }
 
   fetchListOfUsers(): Observable<ListResponse> {
-    return this.http.get(this.apiUrl, {responseType: 'text'}).pipe(map(result => {
-      const decoder = new CSVDecoder(result);
-      const titles = decoder.nextLine();
-      const items = decoder.decode();
-      return {titles, items} as ListResponse;
-    }));
+    return this.http.get(this.apiUrl, {responseType: 'text'}).pipe(map(result => this.decodeCSV(result)));
+  }
+
+  fetchStatus(): Observable<ListResponse> {
+    const endpoint = this.apiUrl + (this.apiUrl[this.apiUrl.length - 1] === '/' ? 'status' : '/status');
+    return this.http.get(endpoint, {responseType: 'text'}).pipe(map(result => this.decodeCSV(result)));
+  }
+
+  private decodeCSV(text: string): ListResponse {
+    const decoder = new CSVDecoder(text);
+    const titles = decoder.nextLine();
+    const items = decoder.decode();
+    return {titles, items} as ListResponse;
   }
 
   createNewCertificate(cert: Cert): Observable<string> {

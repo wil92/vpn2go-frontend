@@ -4,15 +4,27 @@
   <table>
     <tbody>
     <tr>
-      <td *ngFor="let title of titles">{{title}}</td>
+      <td *ngFor="let title of certData.titles">{{title}}</td>
     </tr>
     </tbody>
-    <tr *ngFor="let item of items">
+    <tr *ngFor="let item of certData.items">
       <td *ngFor="let value of item">
         {{value}}
       </td>
       <td>
-        <button (click)="downloadCert(item)">download</button>
+        <button (click)="downloadCert(item, certData)">download</button>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tbody>
+    <tr>
+      <td *ngFor="let title of statusData.titles">{{title}}</td>
+    </tr>
+    </tbody>
+    <tr *ngFor="let item of statusData.items">
+      <td *ngFor="let value of item">
+        {{value}}
       </td>
     </tr>
   </table>
