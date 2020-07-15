@@ -21,7 +21,7 @@ export class VpnService {
     return of({titles, items} as ListResponse);
   }
 
-  createNewCertificate(cert: Cert) {
+  createNewCertificate(cert: Cert): Observable<string> {
     const certResponse = 'client\n' +
       'nobind\n' +
       'dev tun\n' +
@@ -131,6 +131,6 @@ export class VpnService {
       'redirect-gateway def1\n' +
       'comp-lzo';
 
-    of(certResponse);
+    return of(certResponse);
   }
 }

@@ -5,16 +5,19 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from '../../core/core.module';
 import { DashboardComponent } from './dashboard.component';
 import { AuthGuard } from '../../core/guards';
+import { CertFormComponent } from './cert-form';
+import { AngularModule } from '../../core/angular';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, CertFormComponent],
   imports: [
     CommonModule,
     CoreModule,
+    AngularModule,
     RouterModule.forChild([
       {
         path: '',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         component: DashboardComponent
       }
     ])
