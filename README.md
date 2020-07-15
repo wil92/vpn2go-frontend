@@ -13,6 +13,21 @@ Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app 
 
 Start the project with docker: `docker run -p 4000:80 .`
 
+## Publish to DockerHub
+
+Create the version tags in the master branch.
+
+```
+./add-tag.sh 1.0.5
+./add-tag.sh latest
+```
+
+After create the tags, push the master branch to the remote repository with the tags.
+
+```
+git push --tag
+```
+
 ## Build
 
 **Development build**
