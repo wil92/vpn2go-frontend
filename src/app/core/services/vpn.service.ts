@@ -22,7 +22,14 @@ export class VpnService {
 
   fetchStatus(): Observable<ListResponse> {
     const endpoint = this.apiUrl + (this.apiUrl[this.apiUrl.length - 1] === '/' ? 'status' : '/status');
-    return this.http.get(endpoint, {responseType: 'text'}).pipe(map(result => this.decodeCSV(result)));
+    return this.http.get(endpoint, {responseType: 'text'}).pipe(map((result: string) => {
+      const startText = 'ROUTING TABLE\n';
+      const endText = 'GLOBAL STATS\n';
+      const start = result.indexOf(startText);
+      const end = result.indexOf(endText);
+      const text = result.substring(start + startText.length, end);
+      return this.decodeCSV(text);
+    }));
   }
 
   private decodeCSV(text: string): ListResponse {
