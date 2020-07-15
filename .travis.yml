@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-  - "node"
+    - "10"
+sudo: required
+services:
+  - docker
 before_install:
   - pip install --user codecov
 script:
