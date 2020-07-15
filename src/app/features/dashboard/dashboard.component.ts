@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     timer(0, this.REFRESH_TIME)
-      .pipe(takeUntil(this.unsubscriber), flatMap(() => this.vpn.fetchListOfUsers()))
+      .pipe(takeUntil(this.unsubscriber), flatMap(() => this.vpn.fetchListOfCerts()))
       .subscribe(this.loadCertList.bind(this));
     timer(0, this.REFRESH_TIME)
       .pipe(takeUntil(this.unsubscriber), flatMap(() => this.vpn.fetchStatus()))
@@ -45,6 +45,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   async logOut() {
     await this.auth.logOut();
+  }
+
+  downloadCert(item: string[], tableInfo: TableInfo) {
+    const namePos = tableInfo.titlePos.get('name');
+    const user = item[namePos];
+    this.vpn.fetchCertificate(user)
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(
+        certText => {
+          const fileBlob = new Blob([certText], {type: 'text/plain;charset=utf-8'});
+          saveAs(fileBlob, `${user}.ovpn`);
+        },
+        err => console.error(err)
+      );
+  }
+
+  deleteCert(item: string[], tableInfo: TableInfo) {
+    const namePos = tableInfo.titlePos.get('name');
+    const user = item[namePos];
+    this.vpn.deleteCertificate(user)
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(() => this.vpn.fetchListOfCerts().subscribe(this.loadCertList.bind(this)), err => console.error(err));
   }
 
   private loadCertList(listResponse: ListResponse) {
@@ -65,19 +87,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
       return [...previousValue, objList];
     }, []);
     return {titles, items: itemsList, titlePos} as TableInfo;
-  }
-
-  downloadCert(item: string[], tableInfo: TableInfo) {
-    const namePos = tableInfo.titlePos.get('name');
-    const user = item[namePos];
-    this.vpn.fetchCertificate(user)
-      .pipe(takeUntil(this.unsubscriber))
-      .subscribe(
-        certText => {
-          const fileBlob = new Blob([certText], {type: 'text/plain;charset=utf-8'});
-          saveAs(fileBlob, `${user}.ovpn`);
-        },
-        err => console.error(err)
-      );
   }
 }

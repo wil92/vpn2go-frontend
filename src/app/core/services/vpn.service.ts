@@ -16,7 +16,7 @@ export class VpnService {
   constructor(private http: HttpClient) {
   }
 
-  fetchListOfUsers(): Observable<ListResponse> {
+  fetchListOfCerts(): Observable<ListResponse> {
     return this.http.get(this.apiUrl, {responseType: 'text'}).pipe(map(result => this.decodeCSV(result)));
   }
 
@@ -46,5 +46,10 @@ export class VpnService {
   fetchCertificate(user: string): Observable<string> {
     const endpoint = this.apiUrl + (this.apiUrl[this.apiUrl.length - 1] === '/' ? user : `/${user}`);
     return this.http.get(endpoint, {responseType: 'text'});
+  }
+
+  deleteCertificate(user: string): Observable<string> {
+    const endpoint = this.apiUrl + (this.apiUrl[this.apiUrl.length - 1] === '/' ? user : `/${user}`);
+    return this.http.delete(endpoint, {responseType: 'text'});
   }
 }
