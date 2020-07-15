@@ -17,7 +17,7 @@ docker build -t img .
 
 for (( i=0; i<${#tags[@]}; i++ ))
 do
-  echo "Tag name: ${$DOCKER_USER}/vpn2go-frontend:${tags[$i]}"
+  echo "Tag name: ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}"
 
   # tag current image
   docker tag img $DOCKER_USER/vpn2go-frontend:${tags[$i]}
