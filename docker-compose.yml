@@ -2,6 +2,7 @@ version: '3'
 
 services:
   deploy:
+    image: vpn2go-frontend
     build:
       context: .
       args:
