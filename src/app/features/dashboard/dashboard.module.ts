@@ -17,7 +17,7 @@ import { AngularModule } from '../../core/angular';
     RouterModule.forChild([
       {
         path: '',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         component: DashboardComponent
       }
     ])
