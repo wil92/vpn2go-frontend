@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
+import { AuthService } from '../../core/services';
+
+class AuthServiceStub {
+}
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,9 +12,10 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [DashboardComponent],
+      providers: [{provide: AuthService, useClass: AuthServiceStub}]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

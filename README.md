@@ -16,12 +16,6 @@ Setup the next environment variable `PORT_FRONTEND=4004`. Then start the project
 
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-**Production build**
-
-```
-npm run build --prod
-```
-
 ## Running unit tests
 
 Run `npm test`

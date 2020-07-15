@@ -8,7 +8,8 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule],
+      providers: [AuthService]
     });
     service = TestBed.inject(AuthService);
   });
