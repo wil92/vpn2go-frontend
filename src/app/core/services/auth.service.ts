@@ -40,7 +40,8 @@ export class AuthService {
     return this.http.get(this.apiUrl, {
       headers: {
         Authorization: 'Basic ' + btoa(`${username}:${password}`)
-      }
+      },
+      responseType: 'text'
     }).pipe(
       tap(() => {
         localStorage.setItem(AuthService.USERNAME_LS, username);
