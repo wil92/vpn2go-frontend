@@ -4,6 +4,8 @@ services:
   deploy:
     build:
       context: .
+      args:
+        - API_URL=${API_URL}
     restart: always
     ports:
       - '127.0.0.1:${PORT_FRONTEND}:80'
