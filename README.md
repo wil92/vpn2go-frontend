@@ -8,7 +8,7 @@ Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app 
 
 ## Production server
 
-Setup the port environment variable, `PORT_FRONTEND=4004`. Then start the project with docker: `docker-compose up -d`
+Setup the next environment variable `PORT_FRONTEND=4004`. Then start the project with docker: `docker-compose up -d`
 
 ## Build
 
