@@ -13,26 +13,28 @@ export class AuthService {
   static USERNAME_LS = 'USERNAME_LS';
   static PASSWORD_LS = 'PASSWORD_LS';
 
+  memoryStorage = new Map<string, string>();
+
   apiUrl = environment.apiUrl;
 
   constructor(private router: Router, private http: HttpClient) {
   }
 
   isLogIn(): boolean {
-    const username = localStorage.getItem(AuthService.USERNAME_LS);
-    const password = localStorage.getItem(AuthService.PASSWORD_LS);
+    const username = this.memoryStorage.get(AuthService.USERNAME_LS);
+    const password = this.memoryStorage.get(AuthService.PASSWORD_LS);
     return !!username && !!password;
   }
 
   getCredentials(): { username: string, password: string } {
-    const username = localStorage.getItem(AuthService.USERNAME_LS);
-    const password = localStorage.getItem(AuthService.PASSWORD_LS);
+    const username = this.memoryStorage.get(AuthService.USERNAME_LS);
+    const password = this.memoryStorage.get(AuthService.PASSWORD_LS);
     return {username, password};
   }
 
   logOut(): Promise<any> {
-    localStorage.removeItem(AuthService.USERNAME_LS);
-    localStorage.removeItem(AuthService.PASSWORD_LS);
+    this.memoryStorage.delete(AuthService.USERNAME_LS);
+    this.memoryStorage.delete(AuthService.PASSWORD_LS);
     return this.router.navigate(['/login']);
   }
 
@@ -44,8 +46,8 @@ export class AuthService {
       responseType: 'text'
     }).pipe(
       tap(() => {
-        localStorage.setItem(AuthService.USERNAME_LS, username);
-        localStorage.setItem(AuthService.PASSWORD_LS, password);
+        this.memoryStorage.set(AuthService.USERNAME_LS, username);
+        this.memoryStorage.set(AuthService.PASSWORD_LS, password);
       })
     );
   }
