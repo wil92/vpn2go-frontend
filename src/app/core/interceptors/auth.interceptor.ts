@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     let authReq = req;
     if (this.auth.isLogIn()) {
       const {username, password} = this.auth.getCredentials();
-      authReq = req.clone({headers: req.headers.set('Authorization', 'Bearer')});
+      authReq = req.clone({headers: req.headers.set('Authorization', 'Basic ' + btoa(`${username}:${password}`))});
     }
     return next.handle(authReq);
   }
