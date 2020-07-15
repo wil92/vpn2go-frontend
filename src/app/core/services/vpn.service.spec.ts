@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { VpnService } from './vpn.service';
 
@@ -7,6 +8,7 @@ describe('VpnService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [VpnService]
     });
     service = TestBed.inject(VpnService);
