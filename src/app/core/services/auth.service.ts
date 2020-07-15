@@ -13,7 +13,7 @@ export class AuthService {
   static USERNAME_LS = 'USERNAME_LS';
   static PASSWORD_LS = 'PASSWORD_LS';
 
-  memoryStorage = new Map<string, string>();
+  private static memoryStorage = new Map<string, string>();
 
   apiUrl = environment.apiUrl;
 
@@ -21,20 +21,19 @@ export class AuthService {
   }
 
   isLogIn(): boolean {
-    const username = this.memoryStorage.get(AuthService.USERNAME_LS);
-    const password = this.memoryStorage.get(AuthService.PASSWORD_LS);
+    const {username, password} = this.getCredentials();
     return !!username && !!password;
   }
 
   getCredentials(): { username: string, password: string } {
-    const username = this.memoryStorage.get(AuthService.USERNAME_LS);
-    const password = this.memoryStorage.get(AuthService.PASSWORD_LS);
+    const username = AuthService.memoryStorage.get(AuthService.USERNAME_LS);
+    const password = AuthService.memoryStorage.get(AuthService.PASSWORD_LS);
     return {username, password};
   }
 
   logOut(): Promise<any> {
-    this.memoryStorage.delete(AuthService.USERNAME_LS);
-    this.memoryStorage.delete(AuthService.PASSWORD_LS);
+    AuthService.memoryStorage.delete(AuthService.USERNAME_LS);
+    AuthService.memoryStorage.delete(AuthService.PASSWORD_LS);
     return this.router.navigate(['/login']);
   }
 
@@ -46,8 +45,8 @@ export class AuthService {
       responseType: 'text'
     }).pipe(
       tap(() => {
-        this.memoryStorage.set(AuthService.USERNAME_LS, username);
-        this.memoryStorage.set(AuthService.PASSWORD_LS, password);
+        AuthService.memoryStorage.set(AuthService.USERNAME_LS, username);
+        AuthService.memoryStorage.set(AuthService.PASSWORD_LS, password);
       })
     );
   }
