@@ -5,10 +5,10 @@ then
   export $(cat .env | xargs)
 fi
 
-if [ ! -z "$DOCKER_USER" ] && [ ! -z "$DOCKER_PASSWORD" ]
-then
+tags=$(git tag --points-at HEAD)
 
-  tags=$(git tag --points-at HEAD)
+if [ ! -z "$DOCKER_USER" ] && [ ! -z "$DOCKER_PASSWORD" ] && [ ! -z "$tags" ]
+then
 
   SAVEIFS=$IFS   # Save current IFS
   IFS=$'\n'      # Change IFS to new line
