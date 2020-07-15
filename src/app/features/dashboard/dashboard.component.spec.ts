@@ -1,9 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { DashboardComponent } from './dashboard.component';
-import { AuthService } from '../../core/services';
+import { AuthService, VpnService } from '../../core/services';
 
 class AuthServiceStub {
+}
+
+class VpnServiceStub {
 }
 
 describe('DashboardComponent', () => {
@@ -13,7 +17,11 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      providers: [{provide: AuthService, useClass: AuthServiceStub}]
+      providers: [
+        {provide: AuthService, useClass: AuthServiceStub},
+        {provide: VpnService, useClass: VpnServiceStub}
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   }));
