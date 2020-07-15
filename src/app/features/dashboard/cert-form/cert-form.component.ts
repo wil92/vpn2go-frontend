@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { saveAs } from 'file-saver';
-
 import { VpnService } from '../../../core/services';
 
 @Component({
@@ -23,9 +21,8 @@ export class CertFormComponent {
     if (this.certForm.valid) {
       const user = this.certForm.controls.user.value;
       this.vpn.createNewCertificate({user}).subscribe(
-        certText => {
-          const fileBlob = new Blob([certText], {type: 'text/plain;charset=utf-8'});
-          saveAs(fileBlob, `${user}.ovpn`);
+        () => {
+          this.certForm.controls.user.setValue('');
         },
         err => console.error(err));
     }
