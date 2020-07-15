@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Subject, timer } from 'rxjs';
+import { pipe, Subject, timer } from 'rxjs';
 import { flatMap, takeUntil } from 'rxjs/operators';
 
 import { AuthService, VpnService } from '../../core/services';
@@ -20,6 +20,8 @@ interface TableInfo {
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
+  private REFRESH_TIME = 10000;
+
   certData: TableInfo;
   statusData: TableInfo;
 
@@ -29,10 +31,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    timer(0, 5000)
+    timer(0, this.REFRESH_TIME)
       .pipe(takeUntil(this.unsubscriber), flatMap(() => this.vpn.fetchListOfUsers()))
       .subscribe(this.loadCertList.bind(this));
-    timer(0, 5000)
+    timer(0, this.REFRESH_TIME)
       .pipe(takeUntil(this.unsubscriber), flatMap(() => this.vpn.fetchStatus()))
       .subscribe(this.loadStatusList.bind(this));
   }
@@ -68,12 +70,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   downloadCert(item: string[], tableInfo: TableInfo) {
     const namePos = tableInfo.titlePos.get('name');
     const user = item[namePos];
-    this.vpn.fetchCertificate(user).subscribe(
-      certText => {
-        const fileBlob = new Blob([certText], {type: 'text/plain;charset=utf-8'});
-        saveAs(fileBlob, `${user}.ovpn`);
-      },
-      err => console.error(err)
-    );
+    this.vpn.fetchCertificate(user)
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe(
+        certText => {
+          const fileBlob = new Blob([certText], {type: 'text/plain;charset=utf-8'});
+          saveAs(fileBlob, `${user}.ovpn`);
+        },
+        err => console.error(err)
+      );
   }
 }

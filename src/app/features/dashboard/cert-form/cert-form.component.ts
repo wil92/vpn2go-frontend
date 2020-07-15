@@ -10,6 +10,8 @@ import { VpnService } from '../../../core/services';
 })
 export class CertFormComponent {
 
+  isCreatingCert = false;
+
   certForm = new FormGroup({
     user: new FormControl('', [Validators.required]),
   });
@@ -18,13 +20,18 @@ export class CertFormComponent {
   }
 
   createCert() {
-    if (this.certForm.valid) {
+    if (this.certForm.valid && !this.isCreatingCert) {
+      this.isCreatingCert = true;
       const user = this.certForm.controls.user.value;
       this.vpn.createNewCertificate({user}).subscribe(
         () => {
           this.certForm.controls.user.setValue('');
+          this.isCreatingCert = false;
         },
-        err => console.error(err));
+        err => {
+          console.error(err);
+          this.isCreatingCert = false;
+        });
     }
   }
 }
