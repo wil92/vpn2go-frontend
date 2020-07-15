@@ -20,8 +20,11 @@ export class AuthComponent {
   }
 
   logIn() {
-    this.auth.logIn(this.authForm.controls.username.value, this.authForm.controls.password.value).subscribe(() => {
-      this.router.navigate(['/']);
-    });
+    this.auth.logIn(this.authForm.controls.username.value, this.authForm.controls.password.value).subscribe(
+      () => {
+        this.router.navigate(['/']);
+      }, err => {
+        console.log(err);
+      });
   }
 }

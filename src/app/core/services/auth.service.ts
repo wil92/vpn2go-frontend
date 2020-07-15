@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
-import { of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +13,9 @@ export class AuthService {
   static USERNAME_LS = 'USERNAME_LS';
   static PASSWORD_LS = 'PASSWORD_LS';
 
-  constructor(private router: Router) {
+  apiUrl = environment.apiUrl;
+
+  constructor(private router: Router, private http: HttpClient) {
   }
 
   isLogIn(): boolean {
@@ -31,10 +36,16 @@ export class AuthService {
     return this.router.navigate(['/login']);
   }
 
-  logIn(username, password) {
-    return of({}).pipe(tap(() => {
-      localStorage.setItem(AuthService.USERNAME_LS, username);
-      localStorage.setItem(AuthService.PASSWORD_LS, password);
-    }));
+  logIn(username, password): Observable<any> {
+    return this.http.get(this.apiUrl, {
+      headers: {
+        Authorization: 'Basic ' + btoa(`${username}:${password}`)
+      }
+    }).pipe(
+      tap(() => {
+        localStorage.setItem(AuthService.USERNAME_LS, username);
+        localStorage.setItem(AuthService.PASSWORD_LS, password);
+      })
+    );
   }
 }
