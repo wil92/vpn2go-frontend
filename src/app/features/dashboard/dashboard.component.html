@@ -11,6 +11,9 @@
       <td *ngFor="let value of item">
         {{value}}
       </td>
+      <td>
+        <button (click)="downloadCert(item)">download</button>
+      </td>
     </tr>
   </table>
 </div>
