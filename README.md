@@ -11,12 +11,7 @@ Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app 
 
 ## Production server
 
-Setup the next environment variables:
-
-- `PORT_FRONTEND`: Exposed port for the docker container.
-- `API_URL`: Url of the API to where the frontend will make the requests.
- 
-Then start the project with docker: `docker-compose up -d`
+Start the project with docker: `docker run -p 4000:80 .`
 
 ## Build
 
