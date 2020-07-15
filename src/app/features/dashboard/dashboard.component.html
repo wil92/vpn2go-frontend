@@ -1,4 +1,15 @@
 <div>
   <button (click)="logOut()">LogOut</button>
-  {{apiUrl}}
+  <table>
+    <tbody>
+    <tr>
+      <td *ngFor="let title of titles">{{title}}</td>
+    </tr>
+    </tbody>
+    <tr *ngFor="let item of items">
+      <td *ngFor="let value of item">
+        {{value}}
+      </td>
+    </tr>
+  </table>
 </div>
