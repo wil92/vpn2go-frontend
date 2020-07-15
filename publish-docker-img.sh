@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -f .env ]
+then
+  export $(cat .env | xargs)
+fi
+
 tags=$(git tag --points-at HEAD)
 
 SAVEIFS=$IFS   # Save current IFS
@@ -9,14 +14,12 @@ IFS=$SAVEIFS   # Restore IFS
 
 echo "$DOCKER_PASSWORD" | docker login -u ${DOCKER_USER} --password-stdin
 
-echo $(git status)
-echo $tags
-
 # build docker image
 docker build -t img .
 
 for (( i=0; i<${#tags[@]}; i++ ))
 do
+  echo "---------------------------------"
   echo "Tag name: ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}"
 
   # tag current image
@@ -24,4 +27,5 @@ do
 
   # push docker image to DockerHub
   docker push ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}
+  echo "---------------------------------"
 done
