@@ -1,5 +1,8 @@
 # VPN2go Frontend
 
+[![codecov](https://codecov.io/gh/wil92/vpn2go-frontend/branch/master/graph/badge.svg)](https://codecov.io/gh/wil92/vpn2go-frontend)
+[![Build Status](https://travis-ci.org/wil92/vpn2go-frontend.svg?branch=master)](https://travis-ci.org/wil92/vpn2go-frontend)
+
 Easy setup for OpenVPN frontend. Base on the server side project [vpn2go](https://github.com/jadolg/vpn2go).
 
 ## Development server
