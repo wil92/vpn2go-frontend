@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { of } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 @Injectable()
 export class AuthService {
 
@@ -16,7 +19,7 @@ export class AuthService {
     return !!username && !!password;
   }
 
-  getCredentials(): {username: string, password: string} {
+  getCredentials(): { username: string, password: string } {
     const username = localStorage.getItem(AuthService.USERNAME_LS);
     const password = localStorage.getItem(AuthService.PASSWORD_LS);
     return {username, password};
@@ -26,5 +29,12 @@ export class AuthService {
     localStorage.removeItem(AuthService.USERNAME_LS);
     localStorage.removeItem(AuthService.PASSWORD_LS);
     return this.router.navigate(['/login']);
+  }
+
+  logIn(username, password) {
+    return of({}).pipe(tap(() => {
+      localStorage.setItem(AuthService.USERNAME_LS, username);
+      localStorage.setItem(AuthService.PASSWORD_LS, password);
+    }));
   }
 }

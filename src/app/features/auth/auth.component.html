@@ -1,8 +1,9 @@
 <div>
-  <form [formGroup]="authForm">
+  <form [formGroup]="authForm" (ngSubmit)="logIn()">
     <input type="text"
            formControlName="username">
     <input type="password"
            formControlName="password">
+    <button (click)="logIn()">LogIn</button>
   </form>
 </div>
