@@ -7,4 +7,4 @@ script:
   - npm run test:cc
 after_success:
   - codecov --file coverage/lcov.info --disable search
-  - ./publish-docker-img.sh
+  - bash publish-docker-img.sh
