@@ -1,6 +1,8 @@
 <div>
-  <form [formGroup]="certForm">
-    <input type="text" formControlName="user">
-    <button (click)="createCert()">create</button>
+  <form [formGroup]="certForm" class="mt-2 flex flex-col lg:w-1/2 w-8/12">
+    <input class="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border-0 h-10 border-grey-light rounded rounded-l-none px-3 self-center relative  font-roboto text-xl outline-none"
+           type="text" formControlName="user">
+    <button class="bg-blue-400 py-4 text-center px-17 md:px-12 md:py-4 text-white rounded leading-tight text-xl md:text-base font-sans mt-4 mb-20"
+            (click)="createCert()">create</button>
   </form>
 </div>

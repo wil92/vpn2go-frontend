@@ -1,33 +1,36 @@
 <div>
   <button (click)="logOut()">LogOut</button>
   <app-cert-form></app-cert-form>
-  <table>
+  <table class="border-collapse w-full">
     <tbody>
-    <tr>
-      <td *ngFor="let title of certData?.titles">{{title}}</td>
+    <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+      <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
+          *ngFor="let title of certData?.titles">{{title}}</td>
     </tr>
     </tbody>
-    <tr *ngFor="let item of certData?.items">
-      <td *ngFor="let value of item">
+    <tr *ngFor="let item of certData?.items" class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+      <td *ngFor="let value of item" class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
         {{value}}
       </td>
-      <td>
-        <button (click)="downloadCert(item, certData)">download</button>
+      <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+        <a (click)="downloadCert(item, certData)" class="text-blue-400 hover:text-blue-600 underline pl-6">Download</a>
       </td>
-      <td>
-        <button (click)="deleteCert(item, certData)">delete</button>
+      <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+        <a (click)="deleteCert(item, certData)" class="text-blue-400 hover:text-blue-600 underline pl-6">Delete</a>
       </td>
     </tr>
   </table>
-  <table>
+  <table class="border-collapse w-full">
     <tbody>
-    <tr>
-      <td *ngFor="let title of statusData?.titles">{{title}}</td>
+    <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+      <td *ngFor="let title of statusData?.titles" class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">{{title}}</span>
+      </td>
     </tr>
     </tbody>
-    <tr *ngFor="let item of statusData?.items">
-      <td *ngFor="let value of item">
-        {{value}}
+    <tr *ngFor="let item of statusData?.items" class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+      <td *ngFor="let value of item" class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">{{value}}</span>
       </td>
     </tr>
   </table>
