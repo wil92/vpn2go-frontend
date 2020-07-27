@@ -7,7 +7,7 @@ fi
 
 tags=$(git tag --points-at HEAD)
 
-if [ ! -z "$DOCKER_USER" ] && [ ! -z "$DOCKER_PASSWORD" ] && [ ! -z "$tags" ]
+if [ ! -z "$DOCKER_USER" ] && [ ! -z "$DOCKER_PASSWORD" ]
 then
 
   SAVEIFS=$IFS   # Save current IFS
