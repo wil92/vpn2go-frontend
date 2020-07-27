@@ -1,8 +1,19 @@
-<div>
-  <form [formGroup]="certForm" class="mt-2 flex flex-col lg:w-1/2 w-8/12">
-    <input class="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border-0 h-10 border-grey-light rounded rounded-l-none px-3 self-center relative  font-roboto text-xl outline-none"
-           type="text" formControlName="user">
-    <button class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-            (click)="createCert()">create</button>
-  </form>
-</div>
+<form [formGroup]="certForm">
+  <div class="flex items-center">
+    <input placeholder="username"
+           formControlName="user"
+           type="text"
+           class="w-full leading-normal w-px flex-1 border-0 h-10 px-3 relative self-center font-roboto text-xl outline-none">
+    <button (click)="createCert()"
+      class="bg-blue-600 text-gray-200 px-5 py-2 rounded shadow ml-3">Create</button>
+  </div>
+<!--  <div class="flex flex-row">-->
+<!--    <input placeholder="username"-->
+<!--           class="m-3 leading-normal border-0 h-10 border-grey-light rounded rounded-l-none px-3 font-roboto text-xl outline-none"-->
+<!--           type="text" formControlName="user">-->
+<!--    <button (click)="createCert()"-->
+<!--            class="mr-3 py-2 px-6 text-sm bg-blue-500 hover:bg-blue-700 text-white rounded focus:outline-none focus:shadow-outline">-->
+<!--      <span>Create</span>-->
+<!--    </button>-->
+<!--  </div>-->
+</form>

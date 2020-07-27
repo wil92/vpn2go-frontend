@@ -1,38 +1,61 @@
-<div class="px-3 py-4 flex justify-center">
-  <button class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-          (click)="logOut()">LogOut</button>
-  <app-cert-form></app-cert-form>
-  <table  class="w-full text-md bg-white shadow-md rounded mb-4">
-    <tbody>
-    <tr class="border-b">
-      <td class="text-left p-3 px-5"
-          *ngFor="let title of certData?.titles">{{title}}</td>
-    </tr>
-    </tbody>
-    <tr *ngFor="let item of certData?.items" class="border-b hover:bg-orange-100 bg-gray-100">
-      <td *ngFor="let value of item"  class="p-3 px-5">
-        {{value}}
-      </td>
-      <td class="p-3 px-5 flex justify-end">
-        <button type="button" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                click)="downloadCert(item, certData)">Download</button>
-        <button type="button" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-           (click)="deleteCert(item, certData)">Delete</button>
-      </td>
-    </tr>
-  </table>
-  <table  class="w-full text-md bg-white shadow-md rounded mb-4">
-    <tbody>
-    <tr class="border-b">
-      <td *ngFor="let title of statusData?.titles" class="text-left p-3 px-5">
-        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">{{title}}</span>
-      </td>
-    </tr>
-    </tbody>
-    <tr *ngFor="let item of statusData?.items" class="border-b hover:bg-orange-100 bg-gray-100">
-      <td *ngFor="let value of item" class="p-3 px-5">
-        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">{{value}}</span>
-      </td>
-    </tr>
-  </table>
+<div class="px-3 py-4 flex justify-center bg-blue-200 h-screen w-screen">
+  <div class="container h-screen mx-auto flex-col items-center p-2 md:p-0">
+    <div class="flex items-center justify-start space-x-5">
+      <div class="flex-col m-3">
+        <app-cert-form></app-cert-form>
+      </div>
+      <div class="lg:w-2/5 inline-flex lg:justify-end ">
+        <button (click)="logOut()"
+                class="bg-blue-600 text-gray-200 px-5 py-2 rounded shadow ml-3">
+          <span class="mr-2">LogOut</span>
+        </button>
+      </div>
+    </div>
+    <div
+      class="mt-5 flex px-4 py-4 justify-between bg-white
+				dark:bg-gray-600 shadow-xl rounded-lg cursor-pointer ">
+      <table class="w-full text-md bg-white shadow-md rounded mb-5">
+        <tbody>
+        <tr class="border-b">
+          <td class="text-left p-3 px-5"
+              *ngFor="let title of certData?.titles">{{title.toUpperCase()}}</td>
+        </tr>
+
+        <tr *ngFor="let item of certData?.items" class="border-b hover:bg-orange-100 bg-gray-100">
+          <td *ngFor="let value of item" class="p-3 px-5">
+            {{value}}
+          </td>
+          <td class="p-3 px-5 flex justify-end">
+            <button type="button"
+                    class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    (click)="downloadCert(item, certData)">Download
+            </button>
+            <button type="button"
+                    class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    (click)="deleteCert(item, certData)">Delete
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="mt-5 flex px-4 py-4 justify-between bg-white
+				dark:bg-gray-600 shadow-xl rounded-lg cursor-pointer ">
+      <table class="w-full text-md bg-white shadow-md rounded mb-4">
+        <tr class="border-b">
+          <td *ngFor="let title of statusData?.titles" class="text-left p-3 px-5">
+            {{title}}
+          </td>
+        </tr>
+        <tr *ngFor="let item of statusData?.items" class="border-b hover:bg-orange-100 bg-gray-100">
+          <td *ngFor="let value of item" class="p-3 px-5">
+            {{value}}
+          </td>
+        </tr>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
