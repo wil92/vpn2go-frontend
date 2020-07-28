@@ -6,26 +6,35 @@ then
 fi
 
 tags=$(git tag --points-at HEAD)
+echo "DOCKER_USER: ${DOCKER_USER}"
 
-SAVEIFS=$IFS   # Save current IFS
-IFS=$'\n'      # Change IFS to new line
-tags=($tags) # split to array $names
-IFS=$SAVEIFS   # Restore IFS
+if [ ! -z "$DOCKER_USER" ] && [ ! -z "$DOCKER_PASSWORD" ]
+then
 
-echo "$DOCKER_PASSWORD" | docker login -u ${DOCKER_USER} --password-stdin
+  SAVEIFS=$IFS   # Save current IFS
+  IFS=$'\n'      # Change IFS to new line
+  tags=($tags) # split to array $names
+  IFS=$SAVEIFS   # Restore IFS
 
-# build docker image
-docker build -t img .
+  echo "$DOCKER_PASSWORD" | docker login -u ${DOCKER_USER} --password-stdin
 
-for (( i=0; i<${#tags[@]}; i++ ))
-do
+  # build docker image
+  docker build -t img .
+
+  for (( i=0; i<${#tags[@]}; i++ ))
+  do
+    echo "---------------------------------"
+    echo "TAG NAME: ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}"
+
+    # tag current image
+    docker tag img ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}
+
+    # push docker image to DockerHub
+    docker push ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}
+    echo "---------------------------------"
+  done
+else
   echo "---------------------------------"
-  echo "TAG NAME: ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}"
-
-  # tag current image
-  docker tag img ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}
-
-  # push docker image to DockerHub
-  docker push ${DOCKER_USER}/vpn2go-frontend:${tags[$i]}
+  echo "NO PUSH TO DOCKER_HUB"
   echo "---------------------------------"
-done
+fi
