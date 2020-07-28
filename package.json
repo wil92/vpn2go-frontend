@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --prod --base-href /admin/",
+    "build:prod": "ng build --prod",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cc": "jest --coverage",
