@@ -3,17 +3,12 @@
     <input placeholder="username"
            formControlName="user"
            type="text"
-           class="w-full leading-normal w-px flex-1 border-0 h-10 px-3 relative self-center font-roboto text-xl outline-none">
+           class="flex-grow px-4 rounded-l-full rounded-r-full text-sm focus:outline-none border-grey-light">
+    <input placeholder="duration"
+           formControlName="duration"
+           type="number"
+           class="flex-grow px-4 rounded-l-full rounded-r-full text-sm focus:outline-none border-grey-light">
     <button (click)="createCert()"
       class="bg-blue-600 text-gray-200 px-5 py-2 rounded shadow ml-3">Create</button>
   </div>
-<!--  <div class="flex flex-row">-->
-<!--    <input placeholder="username"-->
-<!--           class="m-3 leading-normal border-0 h-10 border-grey-light rounded rounded-l-none px-3 font-roboto text-xl outline-none"-->
-<!--           type="text" formControlName="user">-->
-<!--    <button (click)="createCert()"-->
-<!--            class="mr-3 py-2 px-6 text-sm bg-blue-500 hover:bg-blue-700 text-white rounded focus:outline-none focus:shadow-outline">-->
-<!--      <span>Create</span>-->
-<!--    </button>-->
-<!--  </div>-->
 </form>
