@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^10.0.0",
-    "@angular-devkit/build-angular": "^0.1000.3",
+    "@angular-devkit/build-angular": "^15.0.4",
     "@angular/cli": "~9.0.3",
     "@angular/compiler-cli": "~9.0.2",
     "@angular/language-service": "~9.0.2",
@@ -40,7 +40,7 @@
     "jest": "^26.1.0",
     "jest-preset-angular": "^8.2.1",
     "postcss-import": "^12.0.1",
-    "postcss-loader": "^3.0.0",
+    "postcss-loader": "^7.0.2",
     "postcss-scss": "^2.1.1",
     "protractor": "~5.4.3",
     "tailwindcss": "^1.5.2",
