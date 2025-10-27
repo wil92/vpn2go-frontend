@@ -3,7 +3,13 @@
 [![codecov](https://codecov.io/gh/wil92/vpn2go-frontend/branch/master/graph/badge.svg)](https://codecov.io/gh/wil92/vpn2go-frontend)
 [![Build Status](https://travis-ci.org/wil92/vpn2go-frontend.svg?branch=master)](https://travis-ci.org/wil92/vpn2go-frontend)
 
-Easy setup for OpenVPN frontend. Base on the server side project [vpn2go](https://github.com/jadolg/vpn2go).
+Easy setup for OpenVPN frontend. Based on the server-side project [vpn2go](https://github.com/jadolg/vpn2go).
+
+## Prerequisites
+
+- Node.js
+- npm
+- Docker
 
 ## Development server
 
@@ -11,7 +17,9 @@ Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app 
 
 ## Production server
 
-Start the project with docker: `docker run -p 4000:80 .`
+Start the project with Docker: `docker run -p 4000:80 .`
+
+> Note: This command runs a Docker container from the current directory’s image, mapping port 4000 on your host to port 80 in the container.
 
 ## Publish to DockerHub
 
@@ -22,7 +30,9 @@ Create the version tags in the master branch.
 ./add-tag.sh latest
 ```
 
-After create the tags, push the master branch to the remote repository with the tags.
+> Note: if needed, make add-tag.sh script executable: `chmod +x add-tag.sh` and log-in to Docker: `docker login`.
+
+After creating the tags, push the master branch to the remote repository with the tags.
 
 ```
 git push --tag
@@ -30,11 +40,11 @@ git push --tag
 
 ## Build
 
-**Development build**
+### Development build
 
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-**Production build**
+### Production build
 
 Run `npm run build:prod` to build the project in production. The build artifacts will be stored in the `dist/` directory.
 
